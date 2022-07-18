@@ -105,32 +105,47 @@ function Run-Stages {
 }
 
 function Package-Dependencies {
-    if ( $script:PackageName -like 'qt*' ) {
+    $Items = @(
+            "./bin/bison.exe"
+            "./bin/m4.exe"
+            "./man1/pcre2*"
+            "./man3/pcre2*"
+            "./share/bison"
+            "./share/doc/pcre2"
+    )
+    if ( $script:PackageName -eq 'gtk4' ) {
         $ArchiveFileName = "windows-deps-${PackageName}-${CurrentDate}-${Target}-${Configuration}.zip"
+        $Items += @(
+            "./bin/sass*"
+            "./bin/pango*.exe"
+            "./bin/pcre2*.exe"
+            "./etc"
+            "./bin/sass*"
+        )
     } else {
-        $ArchiveFileName = "windows-${PackageName}-${CurrentDate}-${Target}.zip"
+
+        if ( $script:PackageName -like 'qt*' ) {
+            $ArchiveFileName = "windows-deps-${PackageName}-${CurrentDate}-${Target}-${Configuration}.zip"
+        } else {
+            $ArchiveFileName = "windows-${PackageName}-${CurrentDate}-${Target}.zip"
+        }
+
+        $Items += @(
+            "./bin/libiconv2.dll"
+            "./bin/libintl3.dll"
+            "./bin/pcre2*"
+            "./bin/regex2.dll"
+            "./cmake/pcre2*"
+            "./include/pcre2*"
+            "./lib/pcre2*"
+            "./lib/pkgconfig/libpcre2*"
+        )
     }
 
     Push-Location -Stack BuildTemp
     Set-Location $ConfigData.OutputPath
 
     Log-Information "Cleanup unnecessary files"
-    $Items = @(
-        "./bin/bison.exe"
-        "./bin/libiconv2.dll"
-        "./bin/libintl3.dll"
-        "./bin/m4.exe"
-        "./bin/pcre2*"
-        "./bin/regex2.dll"
-        "./cmake/pcre2*"
-        "./include/pcre2*"
-        "./lib/pcre2*"
-        "./lib/pkgconfig/libpcre2*"
-        "./man1/pcre2*"
-        "./man3/pcre2*"
-        "./share/bison"
-        "./share/doc/pcre2"
-    )
 
     Remove-Item -ErrorAction 'SilentlyContinue' -Path $Items -Force -Recurse
 
@@ -168,6 +183,8 @@ function Build-Main {
         $script:PackageName = 'qt5'
     } elseif ( $Dependencies -eq 'qt6' ) {
         $script:PackageName = 'qt6'
+    } elseif ( $Dependencies -eq 'gtk4' ) {
+        $script:PackageName = 'gtk4'
     }
 
     $UtilityFunctions = Get-ChildItem -Path $PSScriptRoot/utils.pwsh/*.ps1 -Recurse
@@ -182,11 +199,13 @@ function Build-Main {
     $SubDir = ''
     if ( $script:PackageName -like 'qt*' ) {
         $SubDir = 'deps.qt'
+    } elseif ( $script:PackageName -eq 'gtk4' ) {
+        $SubDir = 'deps.gtk4'
     } else {
         $SubDir = 'deps.windows'
     }
 
-    if ( $Dependencies.Count -eq 0 ) {
+    if ( $Dependencies.Count -eq 0 -or $script:PackageName -eq 'gtk4' ) {
         $DependencyFiles = Get-ChildItem -Path $PSScriptRoot/${SubDir}/*.ps1 -File -Recurse
     } else {
         $DependencyFiles = $Dependencies | ForEach-Object {
@@ -209,7 +228,7 @@ function Build-Main {
 
     Pop-Location -Stack BuildTemp
 
-    if ( $Dependencies.Count -eq 0 -or $script:PackageName -like 'qt*' ) {
+    if ( $Dependencies.Count -eq 0 -or $script:PackageName -like 'qt*' -or $script:PackageName -eq 'gtk4' ) {
         Package-Dependencies
     }
 

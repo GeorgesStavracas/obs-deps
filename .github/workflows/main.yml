@@ -501,6 +501,14 @@ jobs:
 
           Write-Output "::set-output name=found::$(([string]${LabelFound}).ToLower())"
 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Meson
+        run: pip install meson ninja
+
       - name: Build ntv2 debug
         shell: pwsh
         run: |
@@ -572,6 +580,14 @@ jobs:
 
           Write-Output "::set-output name=found::$(([string]${LabelFound}).ToLower())"
 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Meson
+        run: pip install meson ninja
+
       - name: 'Build Windows Qt'
         uses: ./.github/actions/build-windows-qt
         with:
@@ -618,6 +634,14 @@ jobs:
           }
 
           Write-Output "::set-output name=found::$(([string]${LabelFound}).ToLower())"
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Meson
+        run: pip install meson ninja
 
       - name: Create Windows Qt package
         if: ${{ success() && (github.event_name != 'pull_request' || steps.seekingTesters.outputs.found == 'true') }}

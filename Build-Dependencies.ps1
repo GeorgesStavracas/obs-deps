@@ -123,13 +123,7 @@ function Package-Dependencies {
             "./bin/sass*"
         )
     } else {
-
-        if ( $script:PackageName -like 'qt*' ) {
-            $ArchiveFileName = "windows-deps-${PackageName}-${CurrentDate}-${Target}-${Configuration}.zip"
-        } else {
-            $ArchiveFileName = "windows-${PackageName}-${CurrentDate}-${Target}.zip"
-        }
-
+        $ArchiveFileName = "windows-${PackageName}-${CurrentDate}-${Target}.zip"
         $Items += @(
             "./bin/libiconv2.dll"
             "./bin/libintl3.dll"
@@ -179,11 +173,7 @@ function Build-Main {
     if ( $script:PackageName -eq 'Dependencies' ) {
         $script:PackageName = 'deps'
     }
-    if ( $Dependencies -eq 'qt5' ) {
-        $script:PackageName = 'qt5'
-    } elseif ( $Dependencies -eq 'qt6' ) {
-        $script:PackageName = 'qt6'
-    } elseif ( $Dependencies -eq 'gtk4' ) {
+    if ( $Dependencies -eq 'gtk4' ) {
         $script:PackageName = 'gtk4'
     }
 
@@ -197,9 +187,7 @@ function Build-Main {
     Bootstrap
 
     $SubDir = ''
-    if ( $script:PackageName -like 'qt*' ) {
-        $SubDir = 'deps.qt'
-    } elseif ( $script:PackageName -eq 'gtk4' ) {
+    if ( $script:PackageName -eq 'gtk4' ) {
         $SubDir = 'deps.gtk4'
     } else {
         $SubDir = 'deps.windows'
@@ -228,7 +216,7 @@ function Build-Main {
 
     Pop-Location -Stack BuildTemp
 
-    if ( $Dependencies.Count -eq 0 -or $script:PackageName -like 'qt*' -or $script:PackageName -eq 'gtk4' ) {
+    if ( $Dependencies.Count -eq 0 -or $script:PackageName -eq 'gtk4' ) {
         Package-Dependencies
     }
 

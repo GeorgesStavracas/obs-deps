@@ -1,0 +1,24 @@
+[host_machine]
+system = 'darwin'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+
+[binaries]
+c = ['clang']
+cpp = ['clang++']
+objc = ['clang']
+objcpp = ['clang++']
+ar = ['ar']
+strip = ['strip']
+pkgconfig = ['pkg-config']
+
+[built-in options]
+c_args = ['-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+cpp_args = ['-stdlib=libc++', '-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+objc_args = ['-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+objcpp_args = ['-stdlib=libc++', '-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+c_link_args = ['-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+cpp_link_args = ['-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+objc_link_args = ['-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']
+objcpp_link_args = ['-arch', 'x86_64', '-isysroot', '/Applications/Xcode_13.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk', '-mmacosx-version-min=10.13']

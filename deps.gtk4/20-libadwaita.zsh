@@ -65,7 +65,9 @@ config() {
   )
 
   log_debug "Meson configure options: ${args}"
-  PATH="$PATH:${target_config[output_dir]}/bin" meson setup "build_${arch}" ${args}
+  LD_LIBRARY_PATH="${target_config[output_dir]}/lib" \
+  PATH="$PATH:${target_config[output_dir]}/bin" \
+  meson setup "build_${arch}" ${args}
 }
 
 build() {

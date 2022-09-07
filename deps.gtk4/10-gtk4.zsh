@@ -48,6 +48,9 @@ config() {
       autoload -Uz universal_config && universal_config
       return
       ;;
+    macos-arm64)
+      args+=(-Dpixman:a64-neon=disabled)
+      ;;
   }
 
   log_info "Config (%F{3}${target}%f)"
@@ -56,9 +59,9 @@ config() {
   args+=(
     --buildtype "${build_type}"
     --prefix "${target_config[output_dir]}"
+    --cross-file "${SCRIPT_HOME}/deps.gtk4/cross-compile/macos_${arch}.txt"
     -Dbuild-tests=false
     -Dbuild-examples=false
-    -Dcpp_std=c++11
     -Ddemos=false
     -Dintrospection=disabled
     -Dmacos-backend=true
@@ -68,6 +71,7 @@ config() {
     -Dcairo:tests=disabled
     -Dgdk-pixbuf:tests=false
     -Dglib:tests=false
+    -Dgraphene:installed_tests=false
     -Dgraphene:tests=false
     -Dgtk:werror=true
     -Dharfbuzz:tests=disabled
@@ -78,6 +82,8 @@ config() {
 
   log_debug "Meson configure options: ${args}"
   PKG_CONFIG_LIBDIR="${target_config[output_dir]}/lib/pkgconfig" \
+  LD_LIBRARY_PATH="${target_config[output_dir]}/lib" \
+  PATH="$PATH:${target_config[output_dir]}/bin" \
   meson setup "build_${arch}" ${args}
 }
 

@@ -256,9 +256,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        target: [macos-x86_64] # TODO: macos-arm64
+        target: [macos-arm64, macos-x86_64]
         include:
           - target: macos-x86_64
+            config: 'Release'
+          - target: macos-arm64
             config: 'Release'
     env:
       CACHE_REVISION: '1'
@@ -321,16 +323,8 @@ jobs:
           path: ${{ github.workspace }}/${{ matrix.target }}/${{ steps.setup.outputs.artifactFileName }}
 
   macos-gtk4-package:
-    name: 'Package macOS GTK4 (${{ matrix.target }})'
+    name: 'Package macOS GTK4 (Universal)'
     runs-on: macos-12
-    strategy:
-      fail-fast: true
-      matrix:
-        target: [macos-x86_64] # TODO: macos-arm64
-        include:
-          - target: macos-x86_64
-            config: 'Release'
-
     needs: [macos-gtk4-build]
     steps:
       - name: Checkout
@@ -345,13 +339,14 @@ jobs:
           else
             echo "::set-output name=found::false"
           fi
-      - name: Create single architecture binary package
+
+      - name: Create universal binary package
         if: ${{ success() && (github.event_name != 'pull_request' || steps.seekingTesters.outputs.found == 'true') }}
-        uses: ./.github/actions/create-single-arch
+        uses: ./.github/actions/create-universal
         with:
-          base: 'gtk4-macos-universal-${{ github.sha }}'
-          target: '${{ matrix.target }}'
-          outputName: 'gtk4-${{ matrix.target }}-${{ github.sha }}'
+          arm64: 'gtk4-macos-arm64-${{ github.sha }}'
+          x86_64: 'gtk4-macos-x86_64-${{ github.sha }}'
+          outputName: 'gtk4-macos-universal-${{ github.sha }}'
 
   windows-build:
     name: 'Build Windows Dependencies'

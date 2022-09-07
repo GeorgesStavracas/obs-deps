@@ -1,10 +1,10 @@
 autoload -Uz log_debug log_error log_info log_status log_output
 
 ## Dependency Information
-local name='libpanel'
-local version='1.0.alpha1'
-local url='https://gitlab.gnome.org/GNOME/libpanel.git'
-local hash="acaf0109e3548e20e2d6deada81a99544e390a86"
+local name='glib'
+local version='2.73.3'
+local url='https://gitlab.gnome.org/GNOME/glib.git'
+local hash="1edb3c515ad30b5b0a206912c4a2e5936ea9393a"
 
 ## Dependency Overrides
 local -i shared_libs=1
@@ -57,13 +57,12 @@ config() {
     --buildtype "${build_type}"
     --prefix "${target_config[output_dir]}"
     --cross-file "${SCRIPT_HOME}/deps.gtk4/cross-compile/macos_${arch}.txt"
-    -Ddocs=disabled
-    -Dintrospection=disabled
-    -Dvapi=false
+    -Dtests=false
     -Dpkg_config_path="${target_config[output_dir]}/lib/pkgconfig"
   )
 
   log_debug "Meson configure options: ${args}"
+  PKG_CONFIG_LIBDIR="${target_config[output_dir]}/lib/pkgconfig" \
   LD_LIBRARY_PATH="${target_config[output_dir]}/lib" \
   PATH="$PATH:${target_config[output_dir]}/bin" \
   meson setup "build_${arch}" ${args}

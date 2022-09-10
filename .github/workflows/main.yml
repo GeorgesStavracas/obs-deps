@@ -25,12 +25,12 @@ jobs:
             os: 'macos-12'
             config: 'Release'
             type: 'static'
-            revision: 9
+            revision: 10
           - target: macos-x86_64
             os: 'macos-12'
             config: 'Release'
             type: 'static'
-            revision: 9
+            revision: 10
           - target: linux-x86_64
             os: 'ubuntu-20.04'
             config: 'Release'

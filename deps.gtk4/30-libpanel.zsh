@@ -2,9 +2,9 @@ autoload -Uz log_debug log_error log_info log_status log_output
 
 ## Dependency Information
 local name='libpanel'
-local version='1.0.alpha1'
+local version='1.0.1'
 local url='https://gitlab.gnome.org/GNOME/libpanel.git'
-local hash="581785bb0736856ae97b6fa78d36c81d3c97365e"
+local hash="1403a020e5d65e21bc0e16133aeb2b6e7cdca2de"
 
 ## Dependency Overrides
 local -i shared_libs=1

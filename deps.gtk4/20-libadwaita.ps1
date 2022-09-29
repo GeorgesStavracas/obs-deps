@@ -1,8 +1,8 @@
 param(
     [string] $Name = 'libadwaita',
-    [string] $Version = '1.2.rc',
+    [string] $Version = '1.2.0',
     [string] $Uri = 'https://gitlab.gnome.org/GNOME/libadwaita.git',
-    [string] $Hash = 'a6a26cd9c35571a4e0ebacb2c6d763d44e59c045'
+    [string] $Hash = 'a905117bd2150de9e85d65f8cdce8d8fb001b89e'
 )
 
 function Setup-Paths {

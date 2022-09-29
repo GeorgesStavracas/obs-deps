@@ -2,9 +2,9 @@ autoload -Uz log_debug log_error log_info log_status log_output
 
 ## Dependency Information
 local name='glib'
-local version='2.73.3'
+local version='2.74.0'
 local url='https://gitlab.gnome.org/GNOME/glib.git'
-local hash="1edb3c515ad30b5b0a206912c4a2e5936ea9393a"
+local hash="30bd57ecf8aa051de9848ba5a2b140f4810401ff"
 
 ## Dependency Overrides
 local -i shared_libs=1

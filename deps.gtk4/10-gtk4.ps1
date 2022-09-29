@@ -1,8 +1,8 @@
 param(
     [string] $Name = 'gtk4',
-    [string] $Version = '4.8.0',
+    [string] $Version = '4.8.1',
     [string] $Uri = 'https://gitlab.gnome.org/GNOME/gtk.git',
-    [string] $Hash = '9cc1dcf2a4739d55460675903c595f68478e0811'
+    [string] $Hash = '3a941eff4aa0ad66e0aa34e6528bc4d78c5e5d5e'
 )
 
 function Setup {

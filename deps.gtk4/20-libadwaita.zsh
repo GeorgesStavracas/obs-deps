@@ -2,9 +2,9 @@ autoload -Uz log_debug log_error log_info log_status log_output
 
 ## Dependency Information
 local name='libadwaita'
-local version='1.2.rc'
+local version='1.2.0'
 local url='https://gitlab.gnome.org/GNOME/libadwaita.git'
-local hash="a6a26cd9c35571a4e0ebacb2c6d763d44e59c045"
+local hash="a905117bd2150de9e85d65f8cdce8d8fb001b89e"
 
 ## Dependency Overrides
 local -i shared_libs=1

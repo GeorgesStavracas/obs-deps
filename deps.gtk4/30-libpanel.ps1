@@ -1,8 +1,8 @@
 param(
     [string] $Name = 'libpanel',
-    [string] $Version = '1.0.alpha1',
+    [string] $Version = '1.0.1',
     [string] $Uri = 'https://gitlab.gnome.org/GNOME/libpanel.git',
-    [string] $Hash = '581785bb0736856ae97b6fa78d36c81d3c97365e'
+    [string] $Hash = '1403a020e5d65e21bc0e16133aeb2b6e7cdca2de'
 )
 
 function Setup-Paths {

@@ -2,9 +2,9 @@ autoload -Uz log_debug log_error log_info log_status log_output
 
 ## Dependency Information
 local name='gtk4'
-local version='4.8.0'
+local version='4.8.1'
 local url='https://gitlab.gnome.org/GNOME/gtk.git'
-local hash="9cc1dcf2a4739d55460675903c595f68478e0811"
+local hash="3a941eff4aa0ad66e0aa34e6528bc4d78c5e5d5e"
 
 ## Dependency Overrides
 local -i shared_libs=1

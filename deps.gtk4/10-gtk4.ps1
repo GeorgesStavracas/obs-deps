@@ -78,7 +78,7 @@ function Build {
     Log-Information "Build (${Target})"
     Set-Location $Path
 
-    Invoke-External meson compile -C "build_${Target}"
+    Invoke-External meson compile -C "build_${Target}" -j1
 }
 
 function Install {

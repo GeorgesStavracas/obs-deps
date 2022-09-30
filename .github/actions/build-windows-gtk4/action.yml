@@ -76,3 +76,10 @@ runs:
       if: ${{ steps.deps-cache.outputs.cache-hit != 'true' }}
       shell: pwsh
       run: ./Build-Dependencies.ps1 -Dependencies "Gtk4" -Target ${{ inputs.target }} -Configuration ${{ inputs.config }} -Shared
+
+    - name: Print build.ninja
+      shell: pwsh
+      if: ${{ failure() }}
+      run: |
+        ls ${{ github.workspace }}\windows_build_temp\gtk\build_x64
+        cat ${{ github.workspace }}\windows_build_temp\gtk\build_x64\build.ninja
